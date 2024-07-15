@@ -5,7 +5,7 @@ on:
 env: 
   aws_access_key : ${{secrets.ACCESS_KEY}}
   aws_secret_key: ${{secrets.SECRET_KEY}}
-  aws_buket: ${{secrets.BUCKET}}
+  aws_bucket: ${{secrets.BUCKET}}
   aws_region: us-east-1
   aws_cluster: cluster_eks
 
