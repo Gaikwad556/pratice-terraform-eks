@@ -28,7 +28,7 @@ jobs:
 
       - name: Terraform Init
         id: init 
-        run: terraform Init backend configure -backend-config="bucket=${{env.aws_bucket}}"
+        run: terraform init backend configure -backend-config="bucket=${{env.aws_bucket}}"
 
       - name: Terraform validate
         id: validate
@@ -37,6 +37,6 @@ jobs:
       - name: Terraform plan
         id: plan
         run: terraform plan -no-color -output=false -out planfile
-        
+
 
       
