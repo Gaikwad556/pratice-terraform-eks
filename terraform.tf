@@ -8,20 +8,21 @@ terraform {
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "~> 4.33.0"
+      version = "~> 4.0"
     }
     random = {
       source  = "hashicorp/random"
-      version = "~> 5.30.0"
+      version = "~> 3.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 5.57.0"
+      version = "~> 2.0"
     }
   }
+
   backend "s3" {
     bucket = "gitops-556"
-    key = "file/terraform"
+    key    = "file/terraform"
     region = "us-east-1"
   }
 }
