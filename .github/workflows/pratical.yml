@@ -1,0 +1,42 @@
+name: EKS setups 
+on:
+  workflow_dispatch:  
+
+env: 
+  aws_access_key : ${{secrets.ACCESS_KEY}}
+  aws_secret_key: ${{secrets.SECRET_KEY}}
+  aws_buket: ${{secrets.BUCKET}}
+  aws_region: us-east-1
+  aws_cluster: cluster_eks
+
+
+
+jobs:
+  eks_setup:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        id: init 
+        run: terraform Init backend configure -backend-config="bucket=${{env.aws_bucket}}"
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -no-color -output=false -out planfile
+        
+
+      
