@@ -17,8 +17,8 @@ module "vpc" {
       "kubernetes.io/cluster/${var.CLUSTER_NAME}" = "shared"
       "kubernetes.io/role/internal-elb"           = "1"
       "Name"                                      = "k8s-private-subnet"
-    },
-    var.additional_private_subnet_tags
+    }
+    
   )
 
   public_subnet_tags = merge(
@@ -26,7 +26,6 @@ module "vpc" {
       "kubernetes.io/cluster/${var.CLUSTER_NAME}" = "shared"
       "kubernetes.io/role/elb"                    = "1"
       "Name"                                       = "k8s-public-subnet"
-    },
-    var.additional_public_subnet_tags
+    }
   )
 }
