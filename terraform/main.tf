@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 provider "kubernetes" {
-  host                   = module.eks.cluster_endpoint_public_access
-  cluster_ca_certificate = base64decode(module.eks.cluster_ca_certificate.certificate_authority.data)
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.ca_certificate.certificate_authority.data)
 }
 
 data "aws_availability_zones" "available" {}
