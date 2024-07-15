@@ -3,9 +3,9 @@ on:
   workflow_dispatch:  
 
 env: 
-  aws_access_key : ${{secrets.ACCESS_KEY}}
-  aws_secret_key: ${{secrets.SECRET_KEY}}
-  aws_bucket: ${{secrets.BUCKET}}
+  AWS_ACCESS_KEY : ${{secrets.ACCESS_KEY}}
+  AWS_SECRET_KEY: ${{secrets.SECRET_KEY}}
+  AWS_BUCKET: ${{secrets.BUCKET}}
   aws_region: us-east-1
   aws_cluster: cluster_eks
 
