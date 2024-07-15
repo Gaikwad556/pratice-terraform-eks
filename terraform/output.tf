@@ -3,11 +3,16 @@ output "cluster_endpoint" {
   value       = module.eks.cluster_endpoint
 }
 
-output "cluster_ca_certificate" {
-  description = "The CA certificate for the EKS cluster"
-  value       = module.eks.ca_certificate.certificate_authority.data
-}
-
 output "region" {
     value = var.REGION
+}
+
+output "cluster_name" {
+  description = "Amazon Web Service EKS Cluster Name"
+  value       = module.eks.cluster_name
+}
+
+output "cluster_security_group_id" {
+  description = "Security group ID for the Amazon Web Service EKS Cluster "
+  value       = module.eks.cluster_security_group_id
 }
