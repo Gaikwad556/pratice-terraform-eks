@@ -36,7 +36,6 @@ jobs:
 
       - name: Terraform plan
         id: plan
-        run: terraform plan -no-color -output=false -out planfile
-
+        run: terraform plan -no-color -out=planfile -input=false
 
       
