@@ -50,7 +50,7 @@ jobs:
       - name: Terraform apply
         id: apply
         if: steps.plan.outcome == 'success'
-        run: terraform apply -input=false -auto-approve -parallelism=planfile
+        run: terraform apply -input=false -auto-approve -parallelism=1 planfile
 
 
       - name: aws config 
