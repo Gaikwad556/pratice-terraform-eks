@@ -34,8 +34,19 @@ jobs:
         id: validate
         run: terraform validate
 
+      - name: Terraform format
+        id: fmt 
+        run: terraform fmt
+
       - name: Terraform plan
         id: plan
         run: terraform plan -no-color -out=planfile -input=false
+
+      - name: Terraform apply
+        id: apply
+        if: steps.plan.outcome == 'success'
+        run: terraform apply -input=false -auto-approve -parallelism=planfile
+
+      
 
       
