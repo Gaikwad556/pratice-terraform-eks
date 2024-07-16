@@ -8,11 +8,11 @@ module "eks" {
   cluster_endpoint_public_access  = true
 
     vpc_id                   = module.vpc.vpc_id
-  subnet_ids               = [module.vpc.public_subnets]
+  subnet_ids               = module.vpc.public_subnets
 
 
     eks_managed_node_group_defaults = {
-        ami_type       = "AL2023_x86_64"
+        ami_type       = "AL2_x86_64"
   }
 
     eks_managed_node_groups = {
