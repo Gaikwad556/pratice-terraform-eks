@@ -42,11 +42,38 @@ jobs:
         id: plan
         run: terraform plan -no-color -out=planfile -input=false
 
+      - name: error in plan
+        id: error
+        if: steps.plan.outcome == 'failure'
+        run: exit code 1
+
       - name: Terraform apply
         id: apply
         if: steps.plan.outcome == 'success'
         run: terraform apply -input=false -auto-approve -parallelism=planfile
 
-      
+
+      - name: aws config 
+        id: config
+        if: steps.apply.outcome == 'success'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: 'us-east-1'
+          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.SECRET_KEY }}
+
+      - name: cluster 
+        id: eks
+        if: steps.apply.outcome == 'success' && steps.config.outcome == 'success'
+        run: aws eks update-kubeconfig --region ${{env.aws_region}} --name ${{env.aws_cluster}}
+
+      - name: ingress
+        id: ingress
+        if: steps.eks.outcome == 'success'
+        run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/aws/deploy.yaml
+
+
+
+
 
       
